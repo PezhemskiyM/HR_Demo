@@ -1,42 +1,92 @@
 package ru.company.hr;
 
 import java.time.LocalDate;
+import java.time.Period;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@Getter
+@Setter
+@Table(name = "Employee")
 public class Employee {
+	
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
+	private long id;
+	
+	@NotNull
+    @Column(name = "NAME")
 	private String name;
+	
+	@NotNull
+    @Column(name = "DATE_OF_EMPLOYMENT")
 	private LocalDate dateOfEmployment;
+	
+	@NotNull
+    @Column(name = "GROUP")
 	private Group group;
-	private int basicRate;
+	
+    @Column(name = "BASIC_RATE")
+    @Min(value=0, message = "the base rate cannot be negative")
+	private long basicRate;
+    
+    @Column(name = "SUPERSIVOR")
 	private Employee supervisor;
-	
-	public Employee(String name, LocalDate dateOfEmployment, Group group, int basicRate, Employee supervior) {
+    
+	//public Employee() {}
+    
+	/*public Employee(String name, LocalDate dateOfEmployment, Group group, long basicRate, Employee supervior) {
 		this.name = name;
 		this.dateOfEmployment = dateOfEmployment;
 		this.group = group;
-		this.basicRate = basicRate;	
+		this.basicRate = basicRate * 100;	
 		this.supervisor = supervior;
-	}
+	}*/
 	
-	public Employee(String name, LocalDate dateOfEmployment, Group group, int basicRate) {
+	public Employee(String name, LocalDate dateOfEmployment, Group group, long basicRate) {
 		this.name = name;
 		this.dateOfEmployment = dateOfEmployment;
 		this.group = group;
-		this.basicRate = basicRate;	
+		this.basicRate = basicRate * 100;	
 	}
 	
 	public Employee(String name) {
 		this.name = name;
 		this.dateOfEmployment = LocalDate.now();
 		this.group = new GroupEmployee();
-		this.basicRate = 50000;
+		this.basicRate = 0;
 		
 	}
 	
-	public int getSalary() {
+	public long getSalary() {
 		LocalDate reportDate = LocalDate.now();
 		//System.out.println("current salary: " + group.getSalary(basicRate, dateOfEmployment, reportDate));
-		int salary = group.getSalary();
-		System.out.println("salary (" + reportDate + "): " + salary);
+		Period period = dateOfEmployment.until(reportDate);
+		int experience = period.getYears();
+        System.out.println("Стаж сотрудника: " + experience + " лет");
+		 
+		long salary = group.calculateSalary(basicRate, experience);
+		System.out.println("salary (" + reportDate + "): " + (salary / 100f));
 		return salary;
 	}
 }

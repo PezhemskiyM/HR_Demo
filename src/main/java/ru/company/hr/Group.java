@@ -1,5 +1,5 @@
 package ru.company.hr;
 
 public interface Group {
-	int getSalary();
+	public long calculateSalary(long basicRate, int experience);
 }
