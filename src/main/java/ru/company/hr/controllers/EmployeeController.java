@@ -22,7 +22,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import lombok.NoArgsConstructor;
+
+import org.springframework.boot.SpringApplication;
 import ru.company.hr.repository.EmployeeRepository;
 //import ru.company.hr.repository.AutoUserRepository;
 //import ru.company.hr.repository.OrderRepository;
@@ -30,11 +35,12 @@ import ru.company.hr.repository.EmployeeRepository;
 import ru.company.hr.Employee;
 import ru.company.hr.throwsClasses.EmployeeNotFoundException;
 
-@Controller
+@NoArgsConstructor
+@RestController
 @RequestMapping("/")
 public class EmployeeController {
-	@Autowired
-	private final EmployeeRepository repository;
+	//@Autowired
+	private EmployeeRepository repository;
     //private EmployeeRepository employeeRepository;
   
 	/*@Autowired
@@ -49,11 +55,21 @@ public class EmployeeController {
 	@Autowired
 	private MOTRepository mOTRepository;*/
     
+	
+	//@Autowired
 	  EmployeeController(EmployeeRepository repository) {
 	    this.repository = repository;
 	  }
-
-
+	  
+	  @RequestMapping("/")
+	    public String goHome(){
+	        return "index";
+	    }
+	   
+		@RequestMapping("/index")
+		public String goHomes(){
+			return "index";
+		}
 	  // Aggregate root
 	  // tag::get-aggregate-root[]
 	  @GetMapping("/employees")
