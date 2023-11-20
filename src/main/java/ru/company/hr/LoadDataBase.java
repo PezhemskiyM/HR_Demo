@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 import lombok.NoArgsConstructor;
 import ru.company.hr.repository.EmployeeRepository;
-import ru.company.hr.Employee;
+import ru.company.hr.entity.Employee;
 
 @NoArgsConstructor
 @Configuration
@@ -20,8 +20,8 @@ class LoadDatabase {
   CommandLineRunner initDatabase(EmployeeRepository repository) {
 
     return args -> {
-      log.info("Preloading " + repository.save(new Employee("Bilbo Baggins")));
-      log.info("Preloading " + repository.save(new Employee("Frodo Baggins")));
+      //log.info("Preloading " + repository.save(new Employee("Bilbo Baggins")));
+      //log.info("Preloading " + repository.save(new Employee("Frodo Baggins")));
     };
   }
 }
