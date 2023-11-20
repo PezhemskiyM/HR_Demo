@@ -8,4 +8,3 @@ ru\company\hr\LoadDatabase.class
 ru\company\hr\controllers\EmployeeController.class
 ru\company\hr\Group.class
 ru\company\hr\throwsClasses\EmployeeNotFoundException.class
-ru\company\hr\dialect\SQLiteDialect.class

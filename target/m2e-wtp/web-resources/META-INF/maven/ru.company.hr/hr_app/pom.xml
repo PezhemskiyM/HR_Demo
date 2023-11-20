@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 	<parent> 
         <groupId>org.springframework.boot</groupId> 
@@ -18,52 +19,39 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <hibernate.version>6.2.13.Final</hibernate.version>
     <!--<maven.compiler.source>21</maven.compiler.source>
     <maven.compiler.target>21</maven.compiler.target>-->
   </properties>
 
   <dependencies>
-	<!--<dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-webmvc</artifactId>
-        <version>6.0.13</version>
-        <exclusions>
-            <exclusion>
-                <artifactId>commons-logging</artifactId>
-                <groupId>commons-logging</groupId>
-            </exclusion>
-        </exclusions>
-    </dependency>-->
-    <dependency>
+    <!--<dependency>
         <groupId>org.springframework</groupId>
         <artifactId>spring-web</artifactId>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-    </dependency>
+    </dependency>-->
     <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
 	<!--<dependency>
 	    <groupId>org.springframework</groupId>
 	    <artifactId>spring-core</artifactId>
-	    <version>6.0.13</version>
 	</dependency>-->
 	<!-- https://mvnrepository.com/artifact/org.springframework/spring-beans -->
 	<!--<dependency>
 	    <groupId>org.springframework</groupId>
 	    <artifactId>spring-beans</artifactId>
-	    <version>6.0.13</version>
 	</dependency>-->
 	<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
 	<!--<dependency>
 	    <groupId>org.springframework</groupId>
 	    <artifactId>spring-context</artifactId>
-	    <version>6.0.13</version>
-	</dependency>
-	<dependency>
+	</dependency>-->
+	
+	<!--<dependency>
 	    <groupId>org.springframework.data</groupId>
 	    <artifactId>spring-data-jpa</artifactId>
-	    <version>3.1.5</version>
 	</dependency>-->
 
 	<dependency>
@@ -75,21 +63,17 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-data-jpa</artifactId>
     </dependency>
-    <!-- <dependency>
-        <groupId>com.h2database</groupId>
-        <artifactId>h2</artifactId>
-        <version>3.1.5</version>
-    </dependency>-->
+
     <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-test</artifactId>
         <scope>test</scope>
     </dependency>
     
-    <dependency>
+    <!--<dependency>
 	    <groupId>jakarta.persistence</groupId>
 	    <artifactId>jakarta.persistence-api</artifactId>
-	</dependency>
+	</dependency>-->
 
 	<dependency>
         <groupId>org.projectlombok</groupId>
@@ -107,16 +91,22 @@
 	    <artifactId>hibernate-community-dialects</artifactId>
 	</dependency>
 	
-	 <dependency>
+	 <!--<dependency>
 	    <groupId>org.hibernate</groupId>
 	    <artifactId>hibernate-entitymanager</artifactId>
-	    <version>5.1.0.Final</version>
-	</dependency>
+	    <version>5.6.9.Final</version>
+	</dependency>-->
 	
 	<dependency>
+	    <groupId>org.hibernate.javax.persistence</groupId>
+	    <artifactId>hibernate-jpa-2.1-api</artifactId>
+	    <version>1.0.2.Final</version>
+	</dependency>
+	
+	<!--<dependency>
 	    <groupId>org.hibernate.orm</groupId>
 	    <artifactId>hibernate-core</artifactId>
-	</dependency>
+	</dependency>-->
 
 	<!--Logs-->
 	
@@ -146,26 +136,6 @@
             <artifactId>slf4j-log4j12</artifactId>
         </dependency>
 	<!--Logs/-->
-	
-	<!--<dependency>
-        <groupId>javax.xml.bind</groupId> 
-        <artifactId>jaxb-api</artifactId> 
-        <version>2.2.12</version> 
-    </dependency>
-	
-	
-	<dependency>
-	    <groupId>org.jboss.jandex</groupId>
-	    <artifactId>jandex-maven-plugin</artifactId>
-	    <version>1.2.3</version>
-	</dependency>
-	
-	<dependency>
-	    <groupId>jakarta.servlet</groupId>
-	    <artifactId>jakarta.servlet-api</artifactId>
-	    <version>6.0.0</version>
-	    <scope>provided</scope>
-	</dependency>-->
 	
 	<dependency>
         <groupId>javax</groupId>

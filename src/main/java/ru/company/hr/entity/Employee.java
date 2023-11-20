@@ -5,9 +5,23 @@ import java.util.List;
 import java.time.LocalDate;
 import java.time.Period;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+//import jakarta.validation.constraints.Min;
+//import jakarta.validation.constraints.NotNull;
+
+//import javax.persistence.GeneratedValue;
+//import javax.persistence.GenerationType;
+//import javax.persistence.Id;
+//import javax.persistence.Column;
+//import javax.persistence.Entity;
+//import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,15 +29,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-
 import ru.company.hr.Group;
 import ru.company.hr.GroupEmployee;
 
+import org.hibernate.annotations.Type;
 import org.springframework.stereotype.Component;
 
 @Entity
@@ -49,6 +58,7 @@ public class Employee {
 	private LocalDate dateOfEmployment;
 	
 	@NotNull
+	//@Type(type="ru.company.hr.Group")
     @Column(name = "GROUP")
 	private Group group;
 	
