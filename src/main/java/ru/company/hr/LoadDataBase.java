@@ -1,5 +1,8 @@
 package ru.company.hr;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -20,8 +23,8 @@ class LoadDatabase {
   CommandLineRunner initDatabase(EmployeeRepository repository) {
 
     return args -> {
-      //log.info("Preloading " + repository.save(new Employee("Bilbo Baggins")));
-      //log.info("Preloading " + repository.save(new Employee("Frodo Baggins")));
+      log.info("Preloading " + repository.save(new Employee("Bilbo Baggins", LocalDate.of(2017, 12, 7), BigDecimal.valueOf(20000L, 2))));
+      log.info("Preloading " + repository.save(new Employee("Frodo Baggins")));
     };
   }
 }

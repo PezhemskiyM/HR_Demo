@@ -30,7 +30,7 @@ import ru.company.hr.repository.EmployeeRepository;
 //import ru.company.hr.repository.AutoUserRepository;
 //import ru.company.hr.repository.OrderRepository;
 //import ru.company.service.MenuService;
-import ru.company.hr.entity.Employee;
+import ru.company.hr.entity.EmployeeBase;
 import ru.company.hr.throwsClasses.EmployeeNotFoundException;
 
 //@NoArgsConstructor
@@ -70,25 +70,25 @@ public class EmployeeController {
 		}
 
 	  @GetMapping("/employees")
-	  List<Employee> all() {
+	  List<EmployeeBase> all() {
 	    return repository.findAll();
 	  }
 
 	  @PostMapping("/employees")
-	  Employee newEmployee(@RequestBody Employee newEmployee) {
+	  EmployeeBase newEmployee(@RequestBody EmployeeBase newEmployee) {
 	    return repository.save(newEmployee);
 	  }
 
 	  // Single item
 	  
 	  @GetMapping("/employees/{id}")
-	  Employee one(@PathVariable long id) {
+	  EmployeeBase one(@PathVariable long id) {
 	    
 	    return repository.findById(id).orElseThrow(() -> new EmployeeNotFoundException(id));
 	  }
 
 	  @PutMapping("/employees/{id}")
-	  Employee replaceEmployee(@RequestBody Employee newEmployee, @PathVariable long id ) {
+	  EmployeeBase replaceEmployee(@RequestBody EmployeeBase newEmployee, @PathVariable long id ) {
 	   
 	    return repository.findById(id)
 	      .map(employee -> {
@@ -108,7 +108,7 @@ public class EmployeeController {
 	  }
 	  
 	  @GetMapping("/employees/salary{id}")
-	  Employee getSalary(@PathVariable long id) {
+	  EmployeeBase getSalary(@PathVariable long id) {
 	    
 	    return repository.findById(id).orElseThrow(() -> new EmployeeNotFoundException(id));
 	  }
