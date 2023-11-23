@@ -24,7 +24,7 @@ public class MainClass{
     //Session session = sf.openSession();
     applicationContext = SpringApplication.run(MainClass.class, args);
     checkBeansPresence(
-        "Employee", "mainClass");
+        "EmployeeBase", "mainClass");
   }
 
   private static void checkBeansPresence(String... beans) {
