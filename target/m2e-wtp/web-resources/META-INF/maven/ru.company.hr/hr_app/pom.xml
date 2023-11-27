@@ -25,34 +25,6 @@
   </properties>
 
   <dependencies>
-    <!--<dependency>
-        <groupId>org.springframework</groupId>
-        <artifactId>spring-web</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-    </dependency>-->
-    <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
-	<!--<dependency>
-	    <groupId>org.springframework</groupId>
-	    <artifactId>spring-core</artifactId>
-	</dependency>-->
-	<!-- https://mvnrepository.com/artifact/org.springframework/spring-beans -->
-	<!--<dependency>
-	    <groupId>org.springframework</groupId>
-	    <artifactId>spring-beans</artifactId>
-	</dependency>-->
-	<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
-	<!--<dependency>
-	    <groupId>org.springframework</groupId>
-	    <artifactId>spring-context</artifactId>
-	</dependency>-->
-	
-	<!--<dependency>
-	    <groupId>org.springframework.data</groupId>
-	    <artifactId>spring-data-jpa</artifactId>
-	</dependency>-->
 
 	<dependency>
 	    <groupId>org.springframework.boot</groupId>
@@ -69,11 +41,6 @@
         <artifactId>spring-boot-starter-test</artifactId>
         <scope>test</scope>
     </dependency>
-    
-    <!--<dependency>
-	    <groupId>jakarta.persistence</groupId>
-	    <artifactId>jakarta.persistence-api</artifactId>
-	</dependency>-->
 
 	<dependency>
         <groupId>org.projectlombok</groupId>
@@ -102,11 +69,6 @@
 	    <artifactId>hibernate-jpa-2.1-api</artifactId>
 	    <version>1.0.2.Final</version>
 	</dependency>
-	
-	<!--<dependency>
-	    <groupId>org.hibernate.orm</groupId>
-	    <artifactId>hibernate-core</artifactId>
-	</dependency>-->
 
 	<!--Logs-->
 	

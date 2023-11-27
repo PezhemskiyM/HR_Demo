@@ -62,7 +62,7 @@ public abstract class EmployeeBase {
     @Min(value=0, message = "the base rate cannot be negative")
 	private BigDecimal basicRate;
     
-    @JdbcTypeCode(SqlTypes.BIGINT)
+    //@JdbcTypeCode(SqlTypes.BIGINT)
     @ManyToOne(cascade={CascadeType.ALL}, targetEntity = EmployeeBase.class)
 	@JoinColumn(name="supervisor_id")
 	private EmployeeBase supervisor;

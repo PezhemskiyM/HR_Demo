@@ -1,35 +1,16 @@
 package ru.company.hr.controllers;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import javax.validation.Valid;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.Errors;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import lombok.NoArgsConstructor;
 import ru.company.hr.repository.EmployeeRepository;
-//import ru.company.hr.repository.AutoUserRepository;
-//import ru.company.hr.repository.OrderRepository;
-//import ru.company.service.MenuService;
 import ru.company.hr.entity.EmployeeBase;
 import ru.company.hr.throwsClasses.EmployeeNotFoundException;
 
@@ -39,20 +20,6 @@ import ru.company.hr.throwsClasses.EmployeeNotFoundException;
 public class EmployeeController {
 	//@Autowired
 	private final EmployeeRepository repository;
-    //private EmployeeRepository employeeRepository;
-  
-	/*@Autowired
-	private OrderRepository orderRepository;
-
-	@Autowired
-	private AutoUserRepository userRepository;
-    
-	@Autowired
-	private MenuService menuService;
-   
-	@Autowired
-	private MOTRepository mOTRepository;*/
-    
 	
 	@Autowired
 	  EmployeeController(EmployeeRepository repository) {

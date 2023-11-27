@@ -17,7 +17,6 @@ public class Employee extends EmployeeBase {
     public Employee() {
         super();
         super.setGroup(EmployeeEnum.EMPLOYEE);
-        //list = List.of();
         list = Collections.unmodifiableList(list);
         super.setSubordinates(list);
         super.setDateOfEmployment(LocalDate.now());
@@ -27,7 +26,6 @@ public class Employee extends EmployeeBase {
         super();
         super.setGroup(EmployeeEnum.EMPLOYEE);
         super.setName(name);
-        //list = List.of();
         list = Collections.unmodifiableList(list);
         super.setSubordinates(list);
         super.setDateOfEmployment(LocalDate.now());
