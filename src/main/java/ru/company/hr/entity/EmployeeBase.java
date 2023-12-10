@@ -21,8 +21,7 @@ import jakarta.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,7 +29,7 @@ import lombok.Setter;
 import lombok.ToString;
 import ru.company.hr.EmployeeEnum;
 import ru.company.hr.EmployeeService;
-import ru.company.hr.IAbstractEmployeeService;
+import ru.company.hr.IEmployeeService;
 
 @NoArgsConstructor
 @ToString
@@ -62,12 +61,12 @@ public abstract class EmployeeBase {
     @Min(value=0, message = "the base rate cannot be negative")
 	private BigDecimal basicRate;
     
-    //@JdbcTypeCode(SqlTypes.BIGINT)
-    @ManyToOne(cascade={CascadeType.ALL}, targetEntity = EmployeeBase.class)
+    @JsonIgnore
+    @ManyToOne(cascade={CascadeType.MERGE}, targetEntity = EmployeeBase.class)
 	@JoinColumn(name="supervisor_id")
 	private EmployeeBase supervisor;
     
-    @OneToMany(mappedBy="supervisor", cascade=CascadeType.ALL)
+    @OneToMany(mappedBy="supervisor", cascade=CascadeType.MERGE)
     private List<EmployeeBase> subordinates = new ArrayList<EmployeeBase>();
 	
     public EmployeeBase(String name, LocalDate dateofEmployment, BigDecimal basicRate) {
@@ -77,7 +76,7 @@ public abstract class EmployeeBase {
     }
     
 	public BigDecimal calculateSalary(EmployeeBase employee, LocalDate date) {
-		IAbstractEmployeeService service = new EmployeeService();
+		IEmployeeService service = new EmployeeService();
 		return service.calculateSalary(employee, date);
 		
 	}

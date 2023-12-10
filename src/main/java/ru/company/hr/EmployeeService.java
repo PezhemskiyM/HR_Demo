@@ -7,7 +7,7 @@ import java.util.List;
 
 import ru.company.hr.entity.EmployeeBase;
 
-public class EmployeeService implements IAbstractEmployeeService{
+public class EmployeeService implements IEmployeeService{
 
 	private static final BigDecimal EMPLOYEE_PERCENT = new BigDecimal(0.03).setScale(2, RoundingMode.HALF_UP);
     private static final BigDecimal EMPLOYEE_MAX = new BigDecimal(0.3).setScale(2, RoundingMode.HALF_UP);
@@ -19,10 +19,6 @@ public class EmployeeService implements IAbstractEmployeeService{
     private final BigDecimal SALES_PERCENT = new BigDecimal(0.01).setScale(2, RoundingMode.HALF_UP);
     private final BigDecimal SALES_MAX = new BigDecimal(0.35).setScale(2, RoundingMode.HALF_UP);
     private final BigDecimal SALES_PERCENT_SUBORDINATES = new BigDecimal(0.003).setScale(3, RoundingMode.HALF_EVEN);
-
-
-    private BigDecimal salarySub = BigDecimal.valueOf(0).setScale(2, RoundingMode.HALF_UP);
-
 
     private BigDecimal calculateSalaryWithPercent(EmployeeBase employee, LocalDate date) {
 
@@ -47,8 +43,7 @@ public class EmployeeService implements IAbstractEmployeeService{
             throw new ArithmeticException("The wage calculation date is shorter than the date of employment");
         }
 
-        BigDecimal employeePercent = BigDecimal.valueOf(years)
-                .multiply(percent);
+        BigDecimal employeePercent = BigDecimal.valueOf(years).multiply(percent);
 
         if (employeePercent.compareTo(max) > 0) {
             employeePercent = max;
@@ -59,57 +54,51 @@ public class EmployeeService implements IAbstractEmployeeService{
         return employee.getBasicRate().add(surcharge.setScale(2, RoundingMode.HALF_UP));
     }
 
-
-    private BigDecimal calculateSalaryOneEmployee(EmployeeBase employee, LocalDate date) {
-
-        BigDecimal salary = employee.calculateSalary(employee, date);
-
-        return salarySub.add(salary.setScale(2, RoundingMode.HALF_UP));
-    }
-
-
     @Override
     public BigDecimal calculateSalary(EmployeeBase employee, LocalDate date) {
         BigDecimal salary = BigDecimal.ZERO;
-        if (employee.getGroup().equals(EmployeeEnum.EMPLOYEE)) {
-            salary = calculateSalaryWithPercent(employee, date);
-        } else if (employee.getGroup().equals(EmployeeEnum.MANAGER)) {
-            BigDecimal baseSalaryManager = calculateSalaryWithPercent(employee, date);
+        EmployeeEnum groupEmployee = employee.getGroup();
+        
+        BigDecimal baseSalary = calculateSalaryWithPercent(employee, date);
+        
+        if (groupEmployee.equals(EmployeeEnum.EMPLOYEE)) {
+            salary = baseSalary;
+        } else if (groupEmployee.equals(EmployeeEnum.MANAGER)) {
+        	
+        	BigDecimal salarySub = BigDecimal.ZERO;
             for (EmployeeBase sub : employee.getSubordinates()) {
-                salarySub = calculateSalaryOneEmployee(sub, date);
+            	salarySub = salarySub.add(calculateSalary(sub, date));
             }
             salarySub = salarySub.multiply(MANAGER_PERCENT_SUBORDINATES);
-            salary = baseSalaryManager.add(salarySub).setScale(2, RoundingMode.HALF_UP);
-        } else if (employee.getGroup().equals(EmployeeEnum.SALESMAN)) {
-            BigDecimal baseSalaryManager = calculateSalaryWithPercent(employee, date);
+            salary = baseSalary.add(salarySub).setScale(2, RoundingMode.HALF_UP);
+            
+        } else if (groupEmployee.equals(EmployeeEnum.SALESMAN)) {
 
+        	BigDecimal salarySub = BigDecimal.ZERO;
             salarySub = calculateSalaryAllSubordinates(employee.getSubordinates(), date);
             salarySub = salarySub.multiply(SALES_PERCENT_SUBORDINATES);
 
-            salary = baseSalaryManager.add(salarySub).setScale(2, RoundingMode.HALF_UP);
+            salary = baseSalary.add(salarySub).setScale(2, RoundingMode.HALF_UP);
+            
         }
 
         return salary;
     }
 
-    private BigDecimal calculateSalaryAllSubordinates(List<EmployeeBase> list, LocalDate date) {
-        if (list.size() > 0) {
-            EmployeeBase employee = list.get(list.size() - 1);
-
-            salarySub = calculateSalaryOneEmployee(employee, date);
-
-            List<EmployeeBase> subSubordinates = employee.getSubordinates();
-            if (subSubordinates != null && subSubordinates.size() > 0) {
-                calculateSalaryAllSubordinates(subSubordinates, date);
+    private BigDecimal calculateSalaryAllSubordinates(List<EmployeeBase> listSub, LocalDate date) {
+        BigDecimal salarySub = BigDecimal.ZERO;
+    	for (EmployeeBase sub: listSub) {
+        	
+        	BigDecimal tempSalary = calculateSalary(sub, date);
+        	salarySub = salarySub.add(tempSalary);
+        	System.out.println("   " + tempSalary + "( " + sub.getName() + ")");
+        	List<EmployeeBase> listSubSub = sub.getSubordinates();
+        	if (listSubSub != null && listSubSub.size() > 0) {
+                salarySub = salarySub.add(calculateSalaryAllSubordinates(listSubSub, date));
             }
-            list.remove(employee);
-            if (list.size() > 0) {
-                calculateSalaryAllSubordinates(list, date);
-            }
-
-            return salarySub.setScale(2, RoundingMode.HALF_UP);
         }
-        return BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP);
+    	
+        return salarySub;
     }
 	
 }

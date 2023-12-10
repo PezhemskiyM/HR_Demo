@@ -16,8 +16,6 @@ public class MainClass{
 	private static ApplicationContext applicationContext;
 
   public static void main(String... args) {
-	//SessionFactory sf = HibernateUtil.getSessionFactory();
-    //Session session = sf.openSession();
     applicationContext = SpringApplication.run(MainClass.class, args);
     checkBeansPresence(
         "EmployeeBase", "mainClass");

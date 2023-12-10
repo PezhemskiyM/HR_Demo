@@ -1,6 +1,5 @@
 package ru.company.hr.entity;
 
-import java.util.Collections;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -11,14 +10,10 @@ import java.time.LocalDate;
 
 @Entity
 public class Employee extends EmployeeBase {
-	
-	private List<EmployeeBase> list;
 
     public Employee() {
         super();
         super.setGroup(EmployeeEnum.EMPLOYEE);
-        list = Collections.unmodifiableList(list);
-        super.setSubordinates(list);
         super.setDateOfEmployment(LocalDate.now());
     }
     
@@ -26,8 +21,6 @@ public class Employee extends EmployeeBase {
         super();
         super.setGroup(EmployeeEnum.EMPLOYEE);
         super.setName(name);
-        list = Collections.unmodifiableList(list);
-        super.setSubordinates(list);
         super.setDateOfEmployment(LocalDate.now());
     }
     
@@ -44,7 +37,7 @@ public class Employee extends EmployeeBase {
 
     @Override
     public void setSubordinates(List<EmployeeBase> subordinates) {
-        super.setSubordinates(list);
+        //Ничего не делаем. У Employee не бывает подчиненных
     }
 
     @Override

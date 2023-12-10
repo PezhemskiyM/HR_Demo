@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 import ru.company.hr.entity.EmployeeBase;
 
-public interface IAbstractEmployeeService {
+public interface IEmployeeService {
 
 	BigDecimal calculateSalary(EmployeeBase employee, LocalDate date);
 	
