@@ -1,0 +1,89 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		
+		<title>Структура компании</title>
+		<link th:href="@{/css/main.css}" rel="stylesheet" />
+	</head>
+	<body>
+		<form action="index.html" method="post">
+	  <h1>Структура компании:</h1>
+	  
+	  <a th:href="@{/new}" class="btn">Добавить сотрудника</a>
+	  
+	  <ul class="tree">
+	    
+	      
+			<div th:each="emp : ${employees}">
+				<li>
+				<details open>
+				<summary>
+					<div class = "info">
+					    <div>ID: <span th:text="${emp.id}"></span></div>
+					    <div>Группа: <span th:text="${emp.group}"></span></div>
+					    <div>ФИО: <span th:text="${emp.name}"></div>
+					    <div>Дата приёма: <span th:text="${emp.dateOfEmployment}"></div>
+					    <div>Ставка: <span th:text="${emp.basicRate}"></span></div>
+					 </div>
+				</summary>
+		        <div th:each="empSub1 : ${emp.subordinates}">
+					<ul>
+			          <li>
+	  					<details>
+			              <summary>
+							<div class = "infoSub1">
+							    <div>ID: <span th:text="${empSub1.id}"></span></div>
+							    <div>Группа: <span th:text="${empSub1.group}"></span></div>
+							    <div>ФИО: <span th:text="${empSub1.name}"></div>
+							    <div>Дата приёма: <span th:text="${empSub1.dateOfEmployment}"></div>
+							    <div>Ставка: <span th:text="${empSub1.basicRate}"></span></div>
+							 </div>
+						  </summary>
+			              	<div th:each="empSub2 : ${empSub1.subordinates}">
+								<ul>
+						          <li>
+				  					<details>
+						              <summary>
+										<div class = "infoSub1">
+										    <div>ID: <span th:text="${empSub2.id}"></span></div>
+										    <div>Группа: <span th:text="${empSub2.group}"></span></div>
+										    <div>ФИО: <span th:text="${empSub2.name}"></div>
+										    <div>Дата приёма: <span th:text="${empSub2.dateOfEmployment}"></div>
+										    <div>Ставка: <span th:text="${empSub2.basicRate}"></span></div>
+										 </div>
+									  </summary>
+										<div th:each="empSub3 : ${empSub2.subordinates}">
+											<ul>
+									          <li>
+							  					<details>
+									              <summary>
+													<div class = "infoSub1">
+													    <div>ID: <span th:text="${empSub3.id}"></span></div>
+													    <div>Группа: <span th:text="${empSub3.group}"></span></div>
+													    <div>ФИО: <span th:text="${empSub3.name}"></div>
+													    <div>Дата приёма: <span th:text="${empSub3.dateOfEmployment}"></div>
+													    <div>Ставка: <span th:text="${empSub3.basicRate}"></span></div>
+													 </div>
+												  </summary>
+			
+									            </details>
+									          </li>
+									        </ul>
+								        </div>
+						            </details>
+						          </li>
+						        </ul>
+					        </div>
+			            </details>
+			          </li>
+			        </ul>
+		        </div>	
+		        </details>
+		        </li>	
+			</div>  
+	        
+	      
+	    
+	  </ul>
+		</form>
+	</body>
+</html>

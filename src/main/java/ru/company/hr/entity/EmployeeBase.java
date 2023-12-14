@@ -22,6 +22,9 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -38,6 +41,14 @@ import ru.company.hr.IEmployeeService;
 @Entity
 @Table(name = "EMPLOYEE")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "className")
+@JsonSubTypes({
+    @JsonSubTypes.Type(Employee.class),
+    @JsonSubTypes.Type(Manager.class),
+    @JsonSubTypes.Type(Salesman.class) 
+    }
+)
 public abstract class EmployeeBase {
 	
 	@Id
@@ -73,6 +84,13 @@ public abstract class EmployeeBase {
     	this.name = name;
     	this.dateOfEmployment = dateofEmployment;
     	this.basicRate = basicRate;
+    }
+    
+    public EmployeeBase(String name, LocalDate dateofEmployment, BigDecimal basicRate, EmployeeEnum group) {
+    	this.name = name;
+    	this.dateOfEmployment = dateofEmployment;
+    	this.basicRate = basicRate;
+    	this.group = group;
     }
     
 	public BigDecimal calculateSalary(EmployeeBase employee, LocalDate date) {

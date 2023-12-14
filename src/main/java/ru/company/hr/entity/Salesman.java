@@ -2,6 +2,8 @@ package ru.company.hr.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import jakarta.persistence.Entity;
 import ru.company.hr.EmployeeEnum;
 
@@ -9,6 +11,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
+@JsonDeserialize(as = Salesman.class)
 public class Salesman extends EmployeeBase {
 	
 	public Salesman() {

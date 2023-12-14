@@ -7,6 +7,5 @@ import ru.company.hr.entity.EmployeeBase;
 @Repository
 public interface EmployeeRepository extends JpaRepository<EmployeeBase, Long>{
 
-    public List<EmployeeBase> findByNameContaining(String name);
-    
+    public List<EmployeeBase> findBySupervisor(EmployeeBase emp);
 }

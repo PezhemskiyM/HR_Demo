@@ -1,0 +1,122 @@
+.tree{
+  --spacing : 1.5rem;
+  --radius  : 10px;
+}
+
+.tree li{
+  display      : block;
+  position     : relative;
+  padding-left : calc(2 * var(--spacing) - var(--radius) - 2px);
+  --background-color: white;
+}
+
+.tree ul{
+  margin-left  : calc(var(--radius) - var(--spacing));
+  padding-left : 0;
+}
+
+.tree ul li{
+  border-left : 2px solid #ddd;
+}
+
+.tree ul li:last-child{
+  border-color : transparent;
+}
+
+.tree ul li::before{
+  content      : '';
+  display      : block;
+  position     : absolute;
+  top          : calc(var(--spacing) / -2);
+  left         : -2px;
+  width        : calc(var(--spacing) + 2px);
+  height       : calc(var(--spacing) + 1px);
+  border       : solid #ddd;
+  border-width : 0 0 2px 2px;
+}
+
+.tree summary{
+  display : block;
+  cursor  : pointer;
+}
+
+.tree summary::marker,
+.tree summary::-webkit-details-marker{
+  display : none;
+}
+
+.tree summary:focus{
+  outline : none;
+}
+
+.tree summary:focus-visible{
+  outline : 1px dotted #000;
+}
+
+.tree li::after,
+.tree summary::before{
+  content       : '';
+  display       : block;
+  position      : absolute;
+  top           : calc(var(--spacing) / 2 - var(--radius));
+  left          : calc(var(--spacing) - var(--radius) - 1px);
+  width         : calc(1.5 * var(--radius));
+  height        : calc(1.5 * var(--radius));
+  border-radius : 50%;
+  background    : #ddd;
+}
+
+.tree summary::before{
+  content     : '+';
+  z-index     : 1;
+  background  : #0f868c;
+  color       : #fff;
+  line-height : calc(2 * var(--radius) - 5px);
+  text-align  : center;
+}
+
+.tree details[open] > summary::before{
+  content : '-';
+}
+
+.btn {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 15px 26px;
+  color: #FFF;
+  background-color: #0f868c;
+  border-radius: 4px;
+  border: 1px solid #0f868c;
+  text-align: center;
+  width: 87%;
+  display: inline-block; /* Строчно-блочный элемент */
+  text-decoration: none; /* Убираем подчёркивание */
+}
+h1 {
+  text-align  : center;
+  color: #0f868c;
+}
+
+.info{	
+	border: 1px solid #0f868c;
+	width: 300px;	
+}
+
+.infoSub1{	
+	border: 1px solid #0f868c;
+	width: 300px;	
+	left: 50px;
+}
+
+form {
+    max-width: 480px;
+    margin: 50px auto;
+    padding: 16px;
+    border: 1px solid #eaeaea;
+  }
+
+body{
+	background-color: #f8f8f9;
+	
+}
